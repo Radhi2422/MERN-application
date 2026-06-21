@@ -6,7 +6,7 @@ async(req,res)=>{
 
     const Product =
         await product.create(req.body);
-
+console.log(req.body);
     res.status(201).json(Product);
 };
 
