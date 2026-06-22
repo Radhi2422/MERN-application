@@ -11,8 +11,9 @@ const {
 }
 
 = require("../controllers/productController.js");
-router.post("/add", createProduct);
+router.post("/add-product", createProduct);
 
+console.log("Hi");
 router.get("/get", getProduct);
 
 router.get("/:id", getProductById);
