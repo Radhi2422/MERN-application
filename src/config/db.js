@@ -3,13 +3,14 @@ const mongoose = require("mongoose");
 const connectDB = async () => {
     try {
         await mongoose.connect(process.env.MONGO_URI)
-        .then(()=>console.log("MongoDB Connected"))
+        .then(()=>console.log("MongoDB Connected",mongoose.connection.db.databaseName))
         .catch(err=>console.log(err));
+        
     }
     catch(error) {
         console.log(error.message);
         process.exit(1);
     }
 };
-
 module.exports = connectDB;
+
