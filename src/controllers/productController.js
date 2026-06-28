@@ -6,32 +6,27 @@ async(req,res)=>{
 
     const Product =
         await product.create(req.body);
-
     res.status(201).json(Product);
 };
+exports.getProduct = async (req, res) => {
+  try {
+    const products = await product.find({});
+console.log(products);
 
-exports.getProduct =
-async(req,res)=>{
+    return res.status(200).json({
+      success: true,
+      count: products.length,
+      products,
+    });
+  } catch (error) {
+    console.error(error);
 
-    try{
-        const {name}=req.query;
-        let products;
-        if(name){
-            products=await product.find({
-                name:{$regex:name,$options:"i"}
-            })
-        }
-        else{
-            products=await product.find();
-        }
-        res.status(500).json({
-            success:true,
-            count:products.length,
-            products
-        });
-    }catch(error){
-        console.log(error);
-    }
+    return res.status(500).json({
+      success: false,
+      message: "Error fetching products",
+      error: error.message,
+    });
+  }
 };
 
 exports.getProductById =
